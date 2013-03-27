@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
+using iUPB.Common;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkId=234238 dokumentiert.
 
@@ -23,7 +24,7 @@ namespace iUPB
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private readonly Uri _iupbUrl = new Uri("http://www.i-upb.de");
+        private readonly Uri _iupbUrl = new Uri(ConfigProvider.Instance.Get("root_url", "http://www.i-upb.de"));
         public MainPage()
         {
             this.InitializeComponent();
