@@ -8,6 +8,5 @@
     mc:Ignorable="d">
 
     <WebView Name="MainWebView">
-
     </WebView>
 </Page>

@@ -1,8 +1,7 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// Allgemeine Informationen über eine Assembly werden über die folgenden 
+// Allgemeine Informationen über eine Assembly werden über die folgenden
 // Attribute gesteuert. Diese Attributwerte ändern, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
 [assembly: AssemblyTitle("iUPB")]
@@ -17,11 +16,11 @@ using System.Runtime.InteropServices;
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //
 //      Hauptversion
-//      Nebenversion 
+//      Nebenversion
 //      Buildnummer
 //      Revision
 //
-// Es können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
+// Es können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern
 // mithilfe von '*' wie unten dargestellt übernommen werden:
 // [Assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace iUPB.Models
 {
-    interface IListDataModelProvider
+    internal interface IListDataModelProvider<T, U> where T : IListDataModel<U> 
+                                                    where U : IListDataModelItem
     {
-        void load(string url = null);
-        Task<IEnumerable<IListDataModel>> all();
-        Task<IListDataModel> find(int id);
+        void Load(string url = null);
+
+        IEnumerable<T> All();
+
+        T Find(int id);
     }
 }

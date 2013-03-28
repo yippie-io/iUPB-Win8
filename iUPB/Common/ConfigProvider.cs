@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace iUPB.Common
 {
-    class ConfigProvider
+    internal class ConfigProvider
     {
         private Dictionary<string, string> settings;
 
@@ -14,7 +10,6 @@ namespace iUPB.Common
 
         private ConfigProvider()
         {
-
             settings = new Dictionary<string, string>()
             {
                 { "root_url", "http://www.i-upb.de/" },
@@ -34,6 +29,7 @@ namespace iUPB.Common
                 return instance;
             }
         }
+
         public string Get(string key, string fallback = null)
         {
             string value;

@@ -8,13 +8,12 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <!-- 
+                <!--
                     Stile, die allgemeine Aspekte von Aussehen und Verhalten der Plattform definieren
                     Erforderlich für Visual Studio-Projekt- und Elementvorlagen
                  -->
-                <ResourceDictionary Source="Common/StandardStyles.xaml"/>
+                <ResourceDictionary Source="Common/StandardStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -9,58 +9,59 @@ using Windows.Data.Json;
 
 namespace iUPB.Models.Impl
 {
-    class RestaurantDataModelProvider : IListDataModelProvider
+    internal class RestaurantDataModelProvider : IListDataModelProvider<RestaurantDataModel, RestaurantDataModelItem>
     {
-        private bool loaded = false;
+        private bool Loaded = false;
         private Dictionary<string, RestaurantDataModel> restaurants = new Dictionary<string, RestaurantDataModel>();
-        
-        public async void load(string url = null)
+
+        public async void Load(string url = null)
         {
-            if(!loaded){
-            try
+            if (!Loaded)
             {
-                // Create a New HttpClient object.
-                HttpClient client = new HttpClient();
-
-                string responseBody = await client.GetStringAsync(ConfigProvider.Instance.Get("restaurants_url"));
-                JsonArray restaurants = JsonArray.Parse(responseBody);
-                foreach(JsonObject restaurant in restaurants)
+                try
                 {
-                    this.restaurants.Add(restaurant.GetNamedString("name"), null);
-                }
+                    // Create a New HttpClient object.
+                    HttpClient client = new HttpClient();
 
-                int i = 0;
-                foreach(string name in this.restaurants.Keys)
-                {
-                    string menusBody = await client.GetStringAsync(ConfigProvider.Instance.Get("menus_url_prefix") + name);
-                    JsonArray menus = JsonArray.Parse(menusBody);
-                    IEnumerable<RestaurantDataModelItem> items = menus.Select((menu) =>
+                    string responseBody = await client.GetStringAsync(ConfigProvider.Instance.Get("restaurants_url"));
+                    JsonArray restaurants = JsonArray.Parse(responseBody);
+                    foreach (JsonObject restaurant in restaurants)
                     {
-                        JsonObject menuJSON = (JsonObject)menu;
-                        return new RestaurantDataModelItem(menuJSON.GetNamedString("description"), DateTime.Parse(menuJSON.GetNamedString("date")));
-                    });
-                    this.restaurants[name] = new RestaurantDataModel(name, i++,  items.ToList());
-                }
+                        this.restaurants.Add(restaurant.GetNamedString("name"), null);
+                    }
 
-            }
-            catch (HttpRequestException e)
-            {
-                // awaiting is not allowed, so no output in catch parts in Win 8 was planned ?
-                new Windows.UI.Popups.MessageDialog("Sorry, beim Abruf der Restaurantdaten ist leider ein Fehlder aufgetreten.", "Fehler / Restaurantdaten").ShowAsync().GetResults();
-            }
+                    int i = 0;
+                    foreach (string name in this.restaurants.Keys)
+                    {
+                        string menusBody = await client.GetStringAsync(ConfigProvider.Instance.Get("menus_url_prefix") + name);
+                        JsonArray menus = JsonArray.Parse(menusBody);
+                        IEnumerable<RestaurantDataModelItem> items = menus.Select((menu) =>
+                        {
+                            JsonObject menuJSON = menu as JsonObject;
+                            return new RestaurantDataModelItem(menuJSON.GetNamedString("description"), DateTime.Parse(menuJSON.GetNamedString("date")));
+                        });
+                        this.restaurants[name] = new RestaurantDataModel(name, i++, items.ToList());
+                        Loaded = true;
+                    }
+                }
+                catch (HttpRequestException e)
+                {
+                    // awaiting is not allowed, so no output in catch parts in Win 8 was planned ?
+                    new Windows.UI.Popups.MessageDialog("Sorry, beim Abruf der Restaurantdaten ist leider ein Fehlder aufgetreten.", "Fehler / Restaurantdaten").ShowAsync().GetResults();
+                }
             }
         }
 
-        public async Task<IEnumerable<RestaurantDataModel>> all()
+        public IEnumerable<RestaurantDataModel> All()
         {
-            this.load();
+            this.Load();
             return restaurants.Values.AsEnumerable();
         }
 
-        public async Task<RestaurantDataModel> find(int id)
+        public RestaurantDataModel Find(int id)
         {
-            this.load();
-            return restaurants.Values.First((restaurant) => restaurant.id == id );
+            this.Load();
+            return restaurants.Values.First((restaurant) => restaurant.Id == id);
         }
     }
 }

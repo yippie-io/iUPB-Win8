@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace iUPB.Models
 {
-    interface IListDataModel
+    internal interface IListDataModel<T> where T : IListDataModelItem
     {
-        string title { get; }
-        int id { get; }
-        IEnumerable<IListDataModelItem> items { get; }
+        string Title { get; }
+
+        int Id { get; }
+
+        IEnumerable<T> Items { get; }
     }
 }

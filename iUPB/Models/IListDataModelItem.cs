@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace iUPB.Models
+﻿namespace iUPB.Models
 {
-    interface IListDataModelItem
+    internal interface IListDataModelItem
     {
-        string text { get; }
-        string ToString();
+        string Text { get; }
 
+        string ToString();
     }
 }

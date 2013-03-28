@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace iUPB.Models.Impl
 {
-    class RestaurantDataModel : IListDataModel
+    internal class RestaurantDataModel : IListDataModel<RestaurantDataModelItem>
     {
-
         public RestaurantDataModel(string title, int id, List<RestaurantDataModelItem> items)
         {
-            this.Items = items;
+            this._items = items;
             this._id = id;
             this._title = title;
         }
 
-        private List<RestaurantDataModelItem> Items;
-        public IEnumerable<RestaurantDataModelItem> items { get { return this.Items; } }
+        private List<RestaurantDataModelItem> _items;
 
-        public IEnumerable<RestaurantDataModelItem> itemsByDate(DateTime day)
+        public IEnumerable<RestaurantDataModelItem> Items { get { return this._items; } }
+
+        public IEnumerable<RestaurantDataModelItem> ItemsByDate(DateTime day)
         {
             return this.Items.Where((item, index) =>
             {
@@ -28,13 +26,15 @@ namespace iUPB.Models.Impl
         }
 
         private string _title;
-        public string title
+
+        public string Title
         {
             get { return this._title; }
         }
 
         private int _id;
-        public int id
+
+        public int Id
         {
             get { return this._id; }
         }
