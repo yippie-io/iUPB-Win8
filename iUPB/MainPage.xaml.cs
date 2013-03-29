@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Popups;
+using Windows.UI.ApplicationSettings;
 
 // Die Elementvorlage "Leere Seite" ist unter http://go.microsoft.com/fwlink/?LinkId=234238 dokumentiert.
 
@@ -29,8 +30,22 @@ namespace iUPB
             this.InitializeComponent();
             this.MainWebView.Navigate(_iupbUrl);
             MainWebView.NavigationFailed += OnNavigationError;
+            SettingsPane.GetForCurrentView().CommandsRequested += ShowPrivacyPolicy;
         }
 
+        // Method to add the privacy policy to the settings charm
+        private void ShowPrivacyPolicy(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            SettingsCommand privacyPolicyCommand = new SettingsCommand("privacyPolicy","Datenschutz & Privacy Policy", (uiCommand) => { LaunchPrivacyPolicyUrl(); });
+            args.Request.ApplicationCommands.Add(privacyPolicyCommand);
+        }
+
+        // Method to launch the url of the privacy policy
+        async void LaunchPrivacyPolicyUrl()
+        {
+            Uri privacyPolicyUrl = new Uri("http://www.yippie.io/privacy.html");
+            var result = await Windows.System.Launcher.LaunchUriAsync(privacyPolicyUrl);
+        }
         private async void OnNavigationError(object sender, WebViewNavigationFailedEventArgs e)
         {
             MessageDialog md = new MessageDialog("Sorry, aber du brauchst leider Internet", "Kein Internet");

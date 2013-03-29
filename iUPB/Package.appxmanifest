@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="42035DirkSchumacher.iUPB" Publisher="CN=D7D41B74-A30B-4762-8C72-E261311D2CC3" Version="1.0.0.4" />
+  <Properties>
+    <DisplayName>iUPB</DisplayName>
+    <PublisherDisplayName>Dirk Schumacher</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="iUPB.App">
+      <VisualElements DisplayName="iUPB" Logo="Assets\iupblogo.png" SmallLogo="Assets\smalllogo.png" Description="iUPB" ForegroundText="light" BackgroundColor="#2E7FBA">
+        <DefaultTile ShowName="allLogos" WideLogo="Assets\widelogo.png" ShortName="iUPB" />
+        <SplashScreen Image="Assets\SplashScreen.png" />
+      </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>
